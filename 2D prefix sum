@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+Problem: 2D Range Sum Queries
+-----------------------------
+
+You are given a matrix of size n × m with integer elements.
+You need to answer q queries, where each query asks for the sum
+of elements in a submatrix defined by the top-left corner (x1, y1)
+and bottom-right corner (x2, y2).
+
+Constraints:
+1 ≤ n, m ≤ 1000
+1 ≤ q ≤ 10^5
+1 ≤ x1 ≤ x2 ≤ n
+1 ≤ y1 ≤ y2 ≤ m
+
+Example:
+Input:
+3 3
+1 2 3
+4 5 6
+7 8 9
+2
+1 1 2 2
+2 2 3 3
+
+Output:
+12
+28
+
+Explanation:
+
+* Query 1: sum of submatrix [(1,1) to (2,2)] = 1+2+4+5 = 12
+* Query 2: sum of submatrix [(2,2) to (3,3)] = 5+6+8+9 = 28
+  */
+
+const int N = 1005;
+int a[N][N], pref[N][N];
+
+int32_t main() {
+ios_base::sync_with_stdio(0);
+cin.tie(0);
+
+```
+int n, m;
+cin >> n >> m;
+
+// Input matrix
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= m; j++) {
+        cin >> a[i][j];
+    }
+}
+
+// Build 2D prefix sum
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= m; j++) {
+        pref[i][j] = pref[i - 1][j] + pref[i][j - 1] - pref[i - 1][j - 1] + a[i][j];
+    }
+}
+
+int q;
+cin >> q;
+
+while (q--) {
+    int x1, y1, x2, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+
+    // Submatrix sum using 2D prefix sums
+    int ans = pref[x2][y2] 
+            - pref[x1 - 1][y2] 
+            - pref[x2][y1 - 1] 
+            + pref[x1 - 1][y1 - 1];
+
+    cout << ans << '\n';
+}
+
+return 0;
+```
+
+}
